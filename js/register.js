@@ -1,28 +1,25 @@
-document.getElementById('registroForm').addEventListener('submit', function(e) {
+document.getElementById('registroForm').addEventListener('submit', function (e) {
   e.preventDefault();
 
   const formData = new FormData(this);
-  const usuario = {};
-
-  formData.forEach((value, key) => {
-    usuario[key] = value;
+  const nuevoUsuario = {};
+  formData.forEach((valor, clave) => {
+    nuevoUsuario[clave] = valor;
   });
 
-  usuario.id = Date.now(); // ID único
+  nuevoUsuario.id = Date.now(); // ID único
 
-  // Obtener usuarios existentes
   const usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
 
-  // Verificar correo duplicado
-  const existe = usuarios.some(u => u.correo === usuario.correo);
+  const existe = usuarios.some((u) => u.correo === nuevoUsuario.correo);
   if (existe) {
-    alert('Este correo ya está registrado');
+    alert('Este correo ya está registrado.');
     return;
   }
 
-  usuarios.push(usuario);
+  usuarios.push(nuevoUsuario);
   localStorage.setItem('usuarios', JSON.stringify(usuarios));
 
-  alert('Registro exitoso');
+  alert('Registro exitoso.');
   window.location.href = 'index.html';
 });
