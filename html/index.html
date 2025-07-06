@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Iniciar Sesión</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <h2>Iniciar Sesión</h2>
+  <form id="loginForm">
+    <input type="email" placeholder="Correo" name="correo" required>
+    
+    <div class="password-container">
+      <input type="password" placeholder="Contraseña" name="clave" id="loginClave" required>
+      <span class="toggle" onclick="togglePassword('loginClave')">👁️</span>
+    </div>
+
+    <button type="submit">Ingresar</button>
+    <p>¿No tienes cuenta? <a href="register.html">Regístrate aquí</a></p>
+  </form>
+
+  <script src="js/togglePassword.js"></script>
+  <script src="js/login.js"></script>
+</body>
+</html>
