@@ -4,10 +4,28 @@ document.getElementById('registroForm').addEventListener('submit', function (e) 
   const formData = new FormData(this);
   const nuevoUsuario = {};
   formData.forEach((valor, clave) => {
-    nuevoUsuario[clave] = valor;
+    nuevoUsuario[clave] = valor.trim();
   });
 
-  nuevoUsuario.id = Date.now(); // ID único
+  // Validaciones
+  const correoValido = /^[a-zA-Z0-9._%+-]+@gmail\.com$/.test(nuevoUsuario.correo);
+  const telefonoValido = /^9\d{8}$/.test(nuevoUsuario.telefono);
+  const dniValido = /^\d{8}$/.test(nuevoUsuario.dni);
+
+  if (!correoValido) {
+    alert("El correo debe terminar en @gmail.com");
+    return;
+  }
+
+  if (!telefonoValido) {
+    alert("El teléfono debe comenzar con 9 y tener 9 dígitos.");
+    return;
+  }
+
+  if (!dniValido) {
+    alert("El DNI debe contener exactamente 8 dígitos numéricos.");
+    return;
+  }
 
   const usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
 
@@ -17,6 +35,7 @@ document.getElementById('registroForm').addEventListener('submit', function (e) 
     return;
   }
 
+  nuevoUsuario.id = Date.now(); // ID único
   usuarios.push(nuevoUsuario);
   localStorage.setItem('usuarios', JSON.stringify(usuarios));
 
